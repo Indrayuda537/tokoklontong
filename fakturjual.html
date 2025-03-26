@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Laporan Faktur Jual</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        table { width: 80%; margin: auto; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 10px; text-align: center; }
+        th { background-color: #2200ff; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Laporan Faktur Jual</h1>
+    <table>
+        <tr>
+            <th>No Faktur</th>
+            <th>Tanggal</th>
+            <th>Nama Pelanggan</th>
+            <th>Produk</th>
+            <th>Jumlah</th>
+            <th>Total Harga</th>
+        </tr>
+        <script>
+            let faktur = [];
+            let produkList = ["Beras", "Minyak Goreng", "Gula", "Teh Celup", "Kopi", "Susu", "Mie Instan", "Telur", "Roti", "Sabun"];
+            let pelangganList = ["Budi", "Ani", "Joko", "Siti", "Andi", "Rina", "Dodi", "Tini", "Rudi", "Fina"];
+            
+            for (let i = 1; i <= 50; i++) {
+                let tanggal = `${(i % 31) + 1} Maret 2024`;
+                let pelanggan = pelangganList[i % pelangganList.length];
+                let produk = produkList[i % produkList.length];
+                let jumlah = Math.floor(Math.random() * 5) + 1;
+                let total = jumlah * (Math.floor(Math.random() * 50000) + 10000);
+                faktur.push([`INV${i.toString().padStart(3, '0')}`, tanggal, pelanggan, produk, jumlah, total]);
+            }
+
+            let tableHTML = "";
+            for (let i = 0; i < faktur.length; i++) {
+                tableHTML += `<tr>
+                    <td>${faktur[i][0]}</td>
+                    <td>${faktur[i][1]}</td>
+                    <td>${faktur[i][2]}</td>
+                    <td>${faktur[i][3]}</td>
+                    <td>${faktur[i][4]}</td>
+                    <td>Rp ${faktur[i][5].toLocaleString()}</td>
+                </tr>`;
+            }
+            document.write(tableHTML);
+        </script>
+    </table>
+    <br>
+    <br>
+    <button onclick="window.location.href='index.html'">Back to home</button>
+</body>
+</html>

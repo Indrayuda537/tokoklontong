@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Entri Transaksi Penjualan</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        table { width: 80%; margin: auto; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 10px; text-align: center; }
+        th { background-color: #2200ff; color: white; }
+        input, button { padding: 10px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Form Entri Transaksi Penjualan</h1>
+    <form id="salesForm">
+        <input type="text" id="product" placeholder="Nama Produk" required>
+        <input type="number" id="quantity" placeholder="Jumlah" required>
+        <input type="number" id="price" placeholder="Harga" required>
+        <button type="button" onclick="addTransaction()">Tambah</button>
+    </form>
+    
+    <h2>Daftar Transaksi</h2>
+    <table>
+        <tr>
+            <th>Nama Produk</th>
+            <th>Jumlah</th>
+            <th>Harga</th>
+            <th>Total</th>
+        </tr>
+        <tbody id="transactionTable"></tbody>
+    </table>
+    
+    <script>
+        function formatRupiah(angka) {
+            return "Rp " + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+        
+        function addTransaction() {
+            var product = document.getElementById("product").value;
+            var quantity = parseInt(document.getElementById("quantity").value);
+            var price = parseInt(document.getElementById("price").value);
+            var total = quantity * price;
+            
+            var table = document.getElementById("transactionTable");
+            var row = table.insertRow();
+            row.insertCell(0).innerHTML = product;
+            row.insertCell(1).innerHTML = quantity;
+            row.insertCell(2).innerHTML = formatRupiah(price);
+            row.insertCell(3).innerHTML = formatRupiah(total);
+            
+            document.getElementById("salesForm").reset();
+        }
+    </script>
+    <br>
+    <br>
+    <button onclick="window.location.href='index.html'">Back to home</button>
+</body>
+</html>
